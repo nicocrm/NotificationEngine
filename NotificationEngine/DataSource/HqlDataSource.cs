@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate;
 using Sage.Platform.Orm;
+using System.Xml.Linq;
 
 namespace NotificationEngine.DataSource
 {
@@ -47,12 +48,13 @@ namespace NotificationEngine.DataSource
 
         public string EscapeLiteral(string literalValue)
         {
-            throw new NotImplementedException();
+            return literalValue == null ? "" : literalValue.Replace("'", "''");
         }
 
         public void LoadConfiguration(string configBlob)
         {
-            throw new NotImplementedException();
+            XDocument xml = XDocument.Parse(configBlob);
+            _query = xml.Element("HQLQuery").Value; // TODO: error handling
         }
     }
 }

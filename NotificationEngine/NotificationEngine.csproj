@@ -76,6 +76,8 @@
     <Compile Include="DataSource\DataSourceFactory.cs" />
     <Compile Include="DataSource\EntityDataSource.cs" />
     <Compile Include="DataSource\EntityRecordWrapper.cs" />
+    <Compile Include="DataSource\HqlDataSource.cs" />
+    <Compile Include="DataSource\HqlRecordWrapper.cs" />
     <Compile Include="Interfaces\IConfigurable.cs" />
     <Compile Include="Interfaces\IWorkItemDataSource.cs" />
     <Compile Include="Interfaces\IDeliverySystem.cs" />

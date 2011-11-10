@@ -12,8 +12,14 @@ namespace NotificationEngine.DataSource
             IWorkItemDataSource ds = null;
             switch (data.DataSourceType)
             {
+                case "HQL":
+                    ds = new HqlDataSource();
+                    break;
+                default:
+                    throw new Exception("Invalid datasource type " + data.DataSourceType);
             }
-
+            ds.LoadConfiguration(data.DataSourceValue);
+            return ds;
         }
     }
 }

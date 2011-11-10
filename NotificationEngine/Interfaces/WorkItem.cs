@@ -5,6 +5,7 @@ using System.Text;
 using Sage.Entity.Interfaces;
 using NotificationEngine.Action;
 using NotificationEngine.Target;
+using NotificationEngine.DataSource;
 
 namespace NotificationEngine.Interfaces
 {
