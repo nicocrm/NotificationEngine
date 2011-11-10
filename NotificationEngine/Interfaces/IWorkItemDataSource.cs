@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NotificationEngine.Interfaces;
 
 namespace NotificationEngine
 {
@@ -11,7 +12,7 @@ namespace NotificationEngine
         /// Retrieve data
         /// </summary>
         /// <returns></returns>
-        IEnumerable<IRecord> Read();
+        IEnumerable<IRecord> Read(WorkItem wo);
 
         List<String> GetFields();
 

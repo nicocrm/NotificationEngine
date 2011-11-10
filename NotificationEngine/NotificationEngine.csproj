@@ -40,6 +40,13 @@
     <Reference Include="NHibernate.Caches.EnyimMemcached">
       <HintPath>..\..\SalesLogix8.0Core\Debug\SlxJobService\bin\NHibernate.Caches.EnyimMemcached.dll</HintPath>
     </Reference>
+    <Reference Include="Quartz">
+      <HintPath>..\..\SalesLogix8.0Core\Debug\SlxJobService\bin\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.Common.Syndication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c59b718b5ca510a8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SalesLogix8.0Core\Debug\SlxJobService\bin\Sage.Common.Syndication.dll</HintPath>
+    </Reference>
     <Reference Include="Sage.Entity.Interfaces">
       <HintPath>..\..\SalesLogix8.0Core\Debug\SlxJobService\bin\Sage.Entity.Interfaces.dll</HintPath>
     </Reference>
@@ -52,8 +59,12 @@
     <Reference Include="Sage.SalesLogix.BusinessRules">
       <HintPath>..\..\SalesLogix8.0Core\Debug\SlxJobService\bin\Sage.SalesLogix.BusinessRules.dll</HintPath>
     </Reference>
+    <Reference Include="Sage.Scheduling">
+      <HintPath>..\..\SalesLogix8.0Core\Debug\SlxJobService\bin\Sage.Scheduling.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,25 +72,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSource\HqlDataSource.cs" />
-    <Compile Include="DataSource\HqlRecordWrapper.cs" />
-    <Compile Include="Interfaces\ConfigurationField.cs" />
+    <Compile Include="Action\ActionFactory.cs" />
+    <Compile Include="DataSource\DataSourceFactory.cs" />
+    <Compile Include="DataSource\EntityDataSource.cs" />
+    <Compile Include="DataSource\EntityRecordWrapper.cs" />
     <Compile Include="Interfaces\IConfigurable.cs" />
     <Compile Include="Interfaces\IWorkItemDataSource.cs" />
     <Compile Include="Interfaces\IDeliverySystem.cs" />
     <Compile Include="Interfaces\IRecord.cs" />
-    <Compile Include="Interfaces\IWorkItem.cs" />
+    <Compile Include="Interfaces\WorkItem.cs" />
     <Compile Include="Interfaces\IWorkItemAction.cs" />
     <Compile Include="Interfaces\IWorkItemTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EmailAction.cs" />
+    <Compile Include="Action\EmailAction.cs" />
     <Compile Include="SmtpDeliverySystem.cs" />
-    <Compile Include="stuff.cs" />
+    <Compile Include="NotificationJob.cs" />
     <Compile Include="Target\DynamicWorkItemTarget.cs" />
+    <Compile Include="Target\EmailWorkItemTarget.cs" />
+    <Compile Include="Target\OwnerFieldWorkItemTarget.cs" />
     <Compile Include="Target\OwnerWorkItemTarget.cs" />
+    <Compile Include="Target\TargetFactory.cs" />
     <Compile Include="Target\UserWorkItemTarget.cs" />
+    <Compile Include="Target\WorkItemTargetFactory.cs" />
     <Compile Include="TemplateEngine.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

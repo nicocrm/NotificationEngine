@@ -2,35 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sage.Platform;
+using NHibernate;
 using Sage.Platform.Orm;
-using System.Collections;
 
 namespace NotificationEngine.DataSource
 {
+    /// <summary>
+    /// Runs HQL query.
+    /// Limitation right now:
+    ///  * you have to have at least 2 fields in qry
+    ///  * you have to assign an alias to each
+    /// </summary>
     public class HqlDataSource : IWorkItemDataSource
     {
         private String _query;
+        private List<string> _fields;
 
-        public IEnumerable<IRecord> Read()
+        public IEnumerable<IRecord> Read(Interfaces.WorkItem wo)
         {
+            List<String> fields = GetFields();
             using (var sess = new SessionScopeWrapper())
             {
                 var qry = sess.CreateQuery(_query);
-                IList lst = qry.List();
-                foreach (object o in lst)
-                    yield return new HqlRecordWrapper(o);
+                foreach (object o in qry.List())
+                {
+                    yield return new HqlRecordWrapper(o is object[] ? (object[])o : new object[] { o },
+                        fields);
+                }
             }
         }
 
         public List<string> GetFields()
         {
-            throw new NotImplementedException();
+            if (_fields != null)
+                return _fields;
+            _fields = new List<string>();
+            using (var sess = new SessionScopeWrapper())
+            {
+                var qry = sess.CreateQuery(_query);
+                _fields = qry.ReturnAliases.ToList();
+            }
+            return _fields;
         }
 
         public string EscapeLiteral(string literalValue)
         {
-            return literalValue == null ? "" : literalValue.Replace("'", "''");
+            throw new NotImplementedException();
         }
 
         public void LoadConfiguration(string configBlob)

@@ -12,6 +12,6 @@ namespace NotificationEngine
     {
         IDeliverySystem DeliverySystem { get; }
 
-        void Execute(List<IRecord> records, List<IWorkItemTarget> targets);
+        void Execute(IList<IRecord> records, IList<IWorkItemTarget> targets);
     }
 }

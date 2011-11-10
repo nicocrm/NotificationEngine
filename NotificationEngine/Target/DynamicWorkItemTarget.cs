@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace NotificationEngine.Target
 {
@@ -19,7 +20,8 @@ namespace NotificationEngine.Target
 
         public void LoadConfiguration(string configBlob)
         {
-            throw new NotImplementedException();
+            XDocument xml = XDocument.Parse(configBlob);
+            _recordField = xml.Root.Element("FieldAlias").Value;
         }
     }
 }

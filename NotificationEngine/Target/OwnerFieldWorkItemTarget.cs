@@ -2,31 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
-using System.Xml.Linq;
 
 namespace NotificationEngine.Target
 {
-    public class OwnerWorkItemTarget : IWorkItemTarget
+    /// <summary>
+    /// Grabs a seccodeid from the query values and expands it to the list of emails on that team
+    /// </summary>
+    public class OwnerFieldWorkItemTarget : IWorkItemTarget
     {
-        private String _ownerId;
+        private String _recordField;
 
         public string Evaluate(IRecord record)
         {
-            IOwner parent = EntityFactory.GetById<IOwner>(_ownerId);
-            if(parent == null)
-                throw new Exception("Owner id " + _ownerId + " not found");
+            String ownerId = record.Get(_recordField);
+            IOwner parent = EntityFactory.GetById<IOwner>(ownerId);
+            if (parent == null)
+                throw new Exception("Owner id " + ownerId + " not found");
             StringBuilder buf = new StringBuilder();
             GetAllTeamMemberEmails(parent, buf);
             return buf.ToString();
-        }        
+        }
 
         public void LoadConfiguration(string configBlob)
         {
             XDocument xml = XDocument.Parse(configBlob);
-            // TODO
+            _recordField = xml.Root.Element("FieldAlias").Value;
         }
+
 
         /// <summary>
         /// Recursively retrieve all users under that team and add their emails

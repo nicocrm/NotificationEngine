@@ -10,6 +10,5 @@ namespace NotificationEngine
     /// </summary>
     public interface IDeliverySystem : IConfigurable
     {
-        IWorkItemAction CreateAction();
     }
 }
