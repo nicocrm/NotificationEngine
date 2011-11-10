@@ -43,12 +43,12 @@ namespace NotificationEngine.DataSource
             XDocument xml = XDocument.Parse(configBlob);
             XElement e = xml.Root.Element("Entity");
             if (e != null)
-                _entity = e.Value;
+                _entity = e.Value.Trim();
             else
                 throw new Exception("Missing Entity node");
             e = xml.Root.Element("Where");
             if (e != null)
-                _where = e.Value;
+                _where = e.Value.Trim();
             else
                 throw new Exception("Missing Where node");
         }

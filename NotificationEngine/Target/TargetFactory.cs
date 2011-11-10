@@ -19,6 +19,9 @@ namespace NotificationEngine.Target
                 case "QueryField":
                     target = new DynamicWorkItemTarget();
                     break;
+                case "OwnerField":
+                    target = new OwnerFieldWorkItemTarget();
+                    break;
                 default:
                     throw new Exception("Invalid target type " + data.TargetType);
             }

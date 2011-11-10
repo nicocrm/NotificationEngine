@@ -92,7 +92,6 @@
     <Compile Include="Target\DynamicWorkItemTarget.cs" />
     <Compile Include="Target\EmailWorkItemTarget.cs" />
     <Compile Include="Target\OwnerFieldWorkItemTarget.cs" />
-    <Compile Include="Target\OwnerWorkItemTarget.cs" />
     <Compile Include="Target\TargetFactory.cs" />
     <Compile Include="Target\UserWorkItemTarget.cs" />
     <Compile Include="Target\WorkItemTargetFactory.cs" />

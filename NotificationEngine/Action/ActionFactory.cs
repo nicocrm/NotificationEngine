@@ -14,6 +14,19 @@ namespace NotificationEngine.Action
             {
                 case "Email Notification":
                     action = new EmailAction();
+                    // TODO - this needs to eb dynamic
+                    action.DeliverySystem = new SmtpDeliverySystem(new SmtpSettings
+                    {
+                        EnableSsl = true,
+                        SmtpPort = 587,
+                        SmtpServer = "smtp.gmail.com",
+                        SmtpUser = "SalesLogixDTS@gmail.com",
+                        SmtpUserPassword = "L1ttl3$uz!",
+                        EmailAddress = "SalesLogixDTS@gmail.com",
+                        DisplayName = "Saleslogix DTS",
+                        IsBodyHtml = false
+                    }
+                    );
                     break;
                 default:
                     throw new Exception("Invalid action type " + data.ActionType);

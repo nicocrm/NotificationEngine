@@ -21,7 +21,7 @@ namespace NotificationEngine.Target
         public void LoadConfiguration(string configBlob)
         {
             XDocument xml = XDocument.Parse(configBlob);
-            _recordField = xml.Root.Element("FieldAlias").Value;
+            _recordField = xml.Root.Element("FieldAlias").Value.Trim();
         }
     }
 }

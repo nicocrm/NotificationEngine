@@ -36,16 +36,7 @@ namespace NotificationEngine
             foreach (IWorkItem wo in EntityFactory.GetRepository<IWorkItem>().FindAll())
             {
                 _workItems.Add(new WorkItem(wo));
-            }
-            //WorkItem testWo = new WorkItem();
-            //testWo.Action = new EmailAction();
-            //testWo.Action.LoadConfiguration("<Config><Body>Body</Body><Subject>Subject</Subject></Config>");
-            //testWo.DataSource = new EntityDataSource();
-            //testWo.DataSource.LoadConfiguration("<Config><Entity>Account</Entity><Where>AccountName like 'a%'</Where></Config>");
-            //testWo.Targets = new List<IWorkItemTarget>();
-            //EmailWorkItemTarget tgt = new EmailWorkItemTarget();
-            //tgt.LoadConfiguration("ngaller@sssworld.com");
-            //testWo.Targets.Add(tgt);            
+            }           
         }
     }
 }

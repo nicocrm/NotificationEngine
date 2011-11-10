@@ -12,7 +12,6 @@ namespace NotificationEngine
     {
         private String _body, _subject;
 
-        private SmtpDeliverySystem _delivery;
 
 
         public void Execute(IList<IRecord> records, IList<IWorkItemTarget> targets)
@@ -21,7 +20,7 @@ namespace NotificationEngine
             String subject = TemplateEngine.EvaluateTemplate(records.Take(1).ToList(), _subject);
             String[] recipient = targets.Select(x => x.Evaluate(records[0])).ToArray();
 
-            _delivery.SendEmail(recipient, subject, body);
+            ((SmtpDeliverySystem)DeliverySystem).SendEmail(recipient, subject, body);
         }
 
         /// <summary>
@@ -31,14 +30,14 @@ namespace NotificationEngine
         public void LoadConfiguration(string configBlob)
         {
             XDocument xml = XDocument.Parse(configBlob);
-            XElement el = xml.Root.Element("Body");
+            XElement el = xml.Root.Element("EmailContent");
             if (el == null)
-                throw new Exception("Missing element body");
-            _body = el.Value;
-            el = xml.Root.Element("Subject");
+                throw new Exception("Missing element EmailContent");
+            _body = el.Value.Trim();
+            el = xml.Root.Element("EmailSubject");
             if (el == null)
-                throw new Exception("Missing element subject");
-            _subject = el.Value;
+                throw new Exception("Missing element EmailSubject");
+            _subject = el.Value.Trim();
 
         }
 

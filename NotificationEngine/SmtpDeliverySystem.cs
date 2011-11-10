@@ -31,6 +31,15 @@ namespace NotificationEngine
 
         private SmtpSettings _settings = new SmtpSettings();
 
+        public SmtpDeliverySystem()
+        {
+        }
+
+        public SmtpDeliverySystem(SmtpSettings settings)
+        {
+            _settings = settings;
+        }
+
         public void LoadConfiguration(string configBlob)
         {
 

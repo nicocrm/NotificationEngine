@@ -32,7 +32,11 @@ namespace NotificationEngine.Interfaces
         /// <returns></returns>
         public String EvaluateLiterals(String source, IWorkItemDataSource dataSource)
         {
-            // TODO
+            if (source.Contains(":LastChecked"))
+            {
+                string formattedDate = String.Format("'{0}'", LastExecuted);
+                source = source.Replace(":LastChecked", formattedDate);
+            }
             return source;
         }
 
@@ -49,7 +53,7 @@ namespace NotificationEngine.Interfaces
         /// <returns></returns>
         public bool CheckSchedule()
         {
-            if (_entity.WorkItemSchedule.NextTimeToExecute != null &&
+            if (_entity.WorkItemSchedule.NextTimeToExecute == null ||
                 _entity.WorkItemSchedule.NextTimeToExecute.Value < DateTime.UtcNow)
                 return true;
             return false;
@@ -88,6 +92,7 @@ namespace NotificationEngine.Interfaces
                 Targets.Add(TargetFactory.CreateTarget(target));
             }
             DataSource = DataSourceFactory.CreateDataSource(wo.WorkItemDataSource);
+            LastExecuted = wo.LastExecuted ?? DateTime.UtcNow;
         }
 
     }

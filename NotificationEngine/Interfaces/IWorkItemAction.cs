@@ -10,7 +10,7 @@ namespace NotificationEngine
     /// </summary>
     public interface IWorkItemAction : IConfigurable
     {
-        IDeliverySystem DeliverySystem { get; }
+        IDeliverySystem DeliverySystem { get; set; }
 
         void Execute(IList<IRecord> records, IList<IWorkItemTarget> targets);
     }
